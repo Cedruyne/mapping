@@ -1,0 +1,10 @@
+{
+    "require": {
+        "guzzlehttp/psr7": "^1.4",
+        "geocoder-php/nominatim-provider": "^4.0",
+        "php-http/guzzle6-adapter": "^1.1",
+        "geocoder-php/chain-provider": "^4.0",
+        "geocoder-php/google-maps-provider": "^4.0",
+        "geocoder-php/free-geoip-provider": "^4.0"
+    }
+}

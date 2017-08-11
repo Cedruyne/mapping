@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Client VTC</title>
+        <link rel="stylesheet" href="assets/js/leaflet-0.7/leaflet.css">
+        <!-- <link rel="stylesheet" href="assets/js/leaflet-1.0/leaflet.css"> -->
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/leaflet-routing-machine.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    </head>
+    <body id="display">
+        <header class="entete">
+            <p class="session session-info">
+                <span id="derniere-update">-</span>
+                <!-- <span id="whois" contenteditable="true">me</span> -->
+            </p>
+            <p class="session-info">
+                <span id="derniere-update">-</span>
+                <span id="whois" contenteditable="true">me</span>
+                <span id="presents"></span>
+            </p>
+        </header>
+        <main class="contenu">
+            <div id="leafletmap"></div>
+            <h1>Bienvenue sur Passepartout</h1>
+        </main>
+        <aside id="menu-principal" class="mobile">
+            <div class="coulisse">
+                <button class="actionneur">Options</button>
+            </div>
+            <ul class="options-menu">
+                <li class="option"><a href="rideRequest.html">Réservation immediate</a></li>
+                <li class="option">Réservation différée</li>
+                <li class="option">Mes favoris</li>
+                <li class="option">Mes paramètres</li>
+            </ul>
+        </aside>
+        <footer>
+            <p class="session-info"></p>
+        </footer>
+        <script src="assets/js/jquery-2.2.3.min.js"></script>
+        <script src="assets/js/detector.js"></script>
+        <script src="assets/js/leaflet-1.0/leaflet.js"></script>
+        <script src="assets/js/position.js"></script>
+        <script src="assets/js/dialogs.js"></script>
+        <script src="assets/js/promise.min.js"></script>
+        <script src="assets/js/jsonld.js"></script>
+        <script type="text/javascript">
+        // extension à jQuery (empruntée à rdfviewer):
+        $.extend({
+            getUrlVars: function(){
+                var vars = [], hash;
+                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for(var i = 0; i < hashes.length; i++)
+                {
+                    hash = hashes[i].split('=');
+                    vars.push(hash[0]);
+                    vars[hash[0]] = hash[1];
+                }
+                return vars;
+            },
+            getUrlVar: function(name){
+                return $.getUrlVars()[name];
+            }
+        });
+
+    	// récupérer @id et name depuis l'URL HTTP
+    	var name = $.getUrlVar("name"),
+            qid = $.getUrlVar("@id"),
+            id = (qid ? qid : $("#whois").text());
+            // Le chauffeur est en état d'attente
+            window.driverStatus = Dialog.passengerStatus.IDLE;
+            localStorage.setItem('driverStatus', Dialog.passengerStatus.IDLE);
+
+        $(document).ready(function () {
+            console.log("isMobile : " + deviceDetector.isMobile);
+            if ('touchend' in navigator) {eventAlternative = 'touchend'} else {eventAlternative = 'click'};
+            console.log(eventAlternative);
+
+            // Activation de événements utilisateur
+            $('.actionneur').on(eventAlternative, function () {
+                // petit menu déroulant:
+                $mobile = $(this).closest('.mobile');
+                if ($mobile.css('left').slice(0,1) == "-") {
+                    $mobile.animate({left: "+=200"})
+                } else {
+                    $mobile.animate({left: "-=200"})
+                }
+            })
+
+            if ('localStorage' in window) {
+                let personalKey = localStorage.getItem('personalKey');
+                if (typeof personalKey == 'undefined') {
+                    window.location.href = "register.html";
+                } else {
+                    let profil = localStorage.getItem('profil');
+                    let hello = $('<h1></h1>').text('Bonjour, '+profil.prenom);
+                    $('header').append(hello);
+                }
+            } else {
+
+            }
+        })
+        </script>
+    </body>
+</html>
