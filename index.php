@@ -44,7 +44,7 @@ foreach ($locations as $key => $value) {
     try {
         $geocode = $geocoder->geocodeQuery(GeocodeQuery::create($value['address']));
         $coordinates = $geocode->first()->getCoordinates();
-        var_dump($coordinates);
+        // var_dump($coordinates);
 
     } catch (Exception $e) {
         echo $e->getMessage();
@@ -52,7 +52,8 @@ foreach ($locations as $key => $value) {
 }
 
 $resultat = $geocoder->geocode($_SERVER['REMOTE_ADDR']);
-var_dump($resultat);
+$city = $geocode->first()->getLocality();
+var_dump($city);
 
 ?>
 <!DOCTYPE html>
