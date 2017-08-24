@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Une simple carte avec leaflet.</title>
+    <link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/master.css">
+    <script src="js/leaflet.js"></script>
+  </head>
+  <body class="container">
+    <h1>Une simple carte avec leaflet.</h1>
+    <div id="trucksMap">
+
+    </div>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/position.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+        // Affichage inital de la carte
+        Pins.gpsPicker()
+            .then(Pins.positionMake, Pins.positionFail);
+    });
+    </script>
+  </body>
+</html>
