@@ -99,8 +99,6 @@ foreach ($locations as $key => $value) {
         maxZoom: 28
     }).addTo(map);
 
-//    L.tileLayer('//{s}.tile.cloudmade.com/41339be4c5064686b781a5a00678de62/998/256/{z}/{x}/{y}.png', {maxZoom: 18}).addTo(map);
-
     <?php print implode('', $mapdata); ?>
 
     var group = new L.featureGroup([<?php print implode(', ', $marker_group); ?>]);
