@@ -1,5 +1,4 @@
 var Pins = (function() {
-  'use strict';
 
   const ACK = 0,
         COORDS_NOT_FOUND = 1,
@@ -12,21 +11,21 @@ var Pins = (function() {
         DEF_LONGITUDE = 2.4,
         DEF_ZOOM = 12;
 
-  this.myMap = L.map('trucksMap');
+  this.trucksMap = L.map('trucksMap');
   this.markers = [];
 
   /** Initialisation de la carte à une position donnée ;
-   * @param profil une structure "@id", "lat", "lng"
+   * @param profil une structure "lat", "lng"
    */
   function initMap(lat, lng) {
       // console.log(profil);
-      this.trafficMap.setView([lat, lng], DEF_ZOOM);
+      this.trucksMap.setView([lat, lng], DEF_ZOOM);
       console.log("Carte recentrée : " + lat + " " + lng);
       var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
       var osmAttrib='<a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
       var osm = L.tileLayer(osmUrl, {
           attribution: osmAttrib}
-        ).addTo(this.myMap);
+        ).addTo(this.trucksMap);
   }
 
   /**
@@ -95,5 +94,15 @@ var Pins = (function() {
           current.timestamp = Math.round(new Date().getTime());
           reject(current);
       });
+  };
+
+  return {
+      "markers" : this.markers,
+      "trucksMap" : this.trucksMap,
+      "positionMake": this.positionMake,
+      "positionFail": this.positionFail,
+      "initMap": this.initMap,
+      "ERRORS_COLORS": COULEURS_ERREURS,
+      "gpsPicker" : function (id, callback) { return gpsPicker(id, callback); }
   };
 })();
