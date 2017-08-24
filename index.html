@@ -14,11 +14,13 @@
     </div>
     <!-- <script src="js/jquery-3.2.1.min.js"></script> -->
     <script src="js/position.js"></script>
+    <script src="js/visitor.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded", function(event) {
         // Affichage inital de la carte
         Pins.gpsPicker()
-            .then(Pins.positionMake, Pins.positionFail);
+            .then(Pins.positionMake, Pins.positionFail)
+            .then(Visitor.visitorMap, Pins.warning);
     });
     </script>
   </body>

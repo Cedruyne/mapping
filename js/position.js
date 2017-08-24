@@ -96,6 +96,15 @@ var Pins = (function() {
       });
   };
 
+  this.warning = function (profil) {
+      var message = "<h1 class='no-init'>Vous êtes en cours de géo-localisation</h1>";
+      console.log(message);
+      if ($(".contenu .no-init").length == 0) { $(".contenu").prepend(message); }
+      return new Promise (function (resolve, reject) {
+          reject(message);
+      });
+  };
+
   return {
       "markers" : this.markers,
       "trucksMap" : this.trucksMap,
