@@ -9,7 +9,7 @@ var Pins = (function() {
 
   const DEF_LATITUDE = 48.7,
         DEF_LONGITUDE = 2.4,
-        DEF_ZOOM = 12;
+        DEF_ZOOM = 18;
 
   this.trucksMap = L.map('trucksMap');
   this.markers = [];
@@ -31,7 +31,9 @@ var Pins = (function() {
       var osm = L.tileLayer(osmUrl, {
           attribution: osmAttrib}
         ).addTo(this.trucksMap);
-  }
+      var marker = L.marker([x,y]).addTo(this.trucksMap);
+      Pins.markers.push(marker);
+  };
 
   /**
    * Détection des possibilités du navigateur, puis lance la fonction donnée
