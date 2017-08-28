@@ -19,8 +19,7 @@
     document.addEventListener("DOMContentLoaded", function(event) {
         // Affichage inital de la carte
         Pins.gpsPicker()
-            .then(Pins.positionMake, Pins.positionFail)
-            .then(Visitor.visitorMap, Pins.warning);
+            .then(Pins.initMap, Pins.positionFail);
     });
     </script>
   </body>
