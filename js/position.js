@@ -18,7 +18,7 @@ var Pins = (function() {
    * @param profil une structure "lat", "lng"
    */
   this.initMap = function (position) {
-      console.long("Initialisation de la carte");
+      console.log("Initialisation de la carte");
       console.log(position);
 
       let x = position.coords.latitude;
